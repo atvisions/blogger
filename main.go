@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	//打开数据库
+	//打开数据库文件
 	db.InitDB()
 	//
 	router := gin.Default()
