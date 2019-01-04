@@ -22,7 +22,7 @@ func main() {
 	router.POST("/post/submit",controller.ArticleSubmit)
 	//文章发布路由
 	router.GET("/article/detail",controller.ArticleDetail)
-	//分类列表
+	//文章分类列表
 	router.GET("/category/category",controller.CategoryList)
 	//更新网站
 	router.GET("/webinfo",controller.WebInfo)
