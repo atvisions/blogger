@@ -1,0 +1,54 @@
+{{ define "views/index.html"}}
+
+{{template "header" .}}
+
+<body>
+<div id="header">
+    <div class="headBox">
+        <div class="logo"><h1>CaiCai博客园</h1></div>
+        <div class="menu">
+            <ul>
+                <li class="on"><a href="/">首页</a></li>
+                <li><a href="/post">发布文章</a></li>
+                <li>留言</li>
+            </ul>
+
+        </div>
+        <div class="user">登陆 / 注册</div>
+    </div>
+</div>
+<div id="wraper">
+    <div class="mainLeft">
+    {{ range .articleList}}
+
+    <div class="articleInfo">
+        <div class="title">{{ .Title}}</div>
+        <div class="content">{{ .Summary}}<a href="/article/detail?id={{.Id}}" id="readArticle">阅读全文</a> </div>
+        <div class="articleTag">
+            <ul>
+                <li><i class="fa fa-user-circle"></i>作者：{{ .UserName}}</li>
+                <li><i class="fa fa-clock-o"></i>发布日期：{{ .CreateTime}}</li>
+                <li><i class="fa fa-tags"></i>分类：{{ .CategoryName}}</li>
+                <li><i class="fa fa-eye"></i>浏览：({{ .ViewCount}})</li>
+                <li><i class="fa fa-comments"></i>评论：({{ .CommentCount}})</li>
+            </ul>
+
+        </div>
+    </div>
+    {{end}}
+    </div>
+    <div class="mainRight">
+        <div class="categoryList">
+            <div class="title"><h2>分类云</h2></div>
+        <ul>
+            {{range .categoryList}}
+            <li><a href="/category/category?id={{.Id}}"> {{.CategoryName}}</a></li>
+            {{end}}
+        </ul>
+        </div>
+    </div>
+</div>
+{{template "footer"}}
+</body>
+</html>
+{{end}}

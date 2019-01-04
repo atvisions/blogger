@@ -1,0 +1,64 @@
+{{ define "views/post.html"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CaiCai博客园</title>
+    <link rel="stylesheet" href="/static/css/global.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/article.css" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="/static/ckeditor5/ckeditor.js"></script>
+
+</head>
+<body>
+<div id="header">
+    <div class="headBox">
+        <div class="logo"><h1>CaiCai博客园</h1></div>
+        <div class="menu">
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li class="on"><a href="/post">发布文章</a></li>
+                <li>留言</li>
+            </ul>
+
+        </div>
+        <div class="user">登陆 / 注册</div>
+    </div>
+</div>
+<div id="wraper">
+    <div class="route">
+        <ul><li><a href="/">首页</a> &raquo; </li><li> 发布文章</li></ul>
+    </div>
+    <div id="ArticlePost">
+    <form action="/post/submit" method="post">
+        <div class="title aBox"><label for="title">标题：</label><input type="text" name="title"></div>
+        <div class="title aBox"><label for="keywords">关键字：</label><input type="text" name="keywords"></div>
+        <div class="userName aBox"><label for="username"> 作者：</label><input type="text" name="username"></div>
+        <div class="category aBox"><label for="category_id">分类：</label><select name="category_id">{{range .}}<option value="{{.Id}}">{{.CategoryName}}</option>{{end}}</select></div>
+        <div class="textarea aBox"><label for="content">文章内容：</label><br><br>
+            <textarea name="content" id="editor"></textarea>
+            <script>
+                var data;
+                ClassicEditor.create(document.querySelector('#editor'), {
+                            ckfinder: {
+                                uploadUrl: '/static/upload/UpImages'
+                            }
+                        }
+                ).then(editor => {
+                    window.editor = editor;
+                    data = editor.getData();
+                    console.log(data);
+                } )
+                        .catch(error => {
+                            console.log(error);
+                        } );
+            </script>
+        </div>
+        <input type="submit" value="发布文章">
+    </form>
+    </div>
+</div>
+{{template "footer"}}
+</body>
+</html>
+{{end}}

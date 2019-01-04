@@ -1,0 +1,42 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.webInfo.WebName}}</title>
+    <meta name="keywords" content="{{.webInfo.Keywords}}" />
+    <meta name="description" content="{{.webInfo.Description}}" />
+    <link rel="stylesheet" href="/static/css/global.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/index.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/article.css" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        window.onload = function(){
+            var text = new Array();
+            var content = document.getElementsByClassName("content");
+            for(i=0;i<content.length;i++){
+                text[i] = content[i].innerHTML;
+            }
+            var HtmlUtil = {
+            htmlDecodeByRegExp:function(str){
+                var s = "";
+                if(str.length == 0) return "";
+                s = str.replace(/&amp;/g,"&");
+                s = s.replace(/&lt;/g,"<");
+                s = s.replace(/&gt;/g,">");
+                s = s.replace(/&nbsp;/g," ");
+                s = s.replace(/&#39;/g,"\'");
+                s = s.replace(/&quot;/g,"\"");
+                return s;
+                }
+            };
+            for(let i=0;i<content.length;i++){
+                var decodeHTML = HtmlUtil.htmlDecodeByRegExp(text[i]);
+                content[i].innerHTML = decodeHTML
+            }
+
+        }
+
+    </script>
+</head>
+{{end}}

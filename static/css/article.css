@@ -1,0 +1,14 @@
+#ArticlePost  {text-align: left;background:#fff;padding:30px;border-radius: 8px}
+#ArticlePost .aBox {float:left;padding:10px 0;width:100%;}
+#ArticlePost label {float:left;width:70px;clear: right}
+#ArticlePost .title h2 {font-size:22px;color:#222}
+#ArticlePost .articleTag {width: 100%;margin-top:20px;overflow:hidden;margin-bottom:20px}
+
+#ArticlePost .articleTag li {float:left;padding-right:20px;}
+#ArticlePost .articleTag li i {margin-right:5px}
+#ArticlePost .content {width:100%;font-size:14px;line-height:26px}
+
+
+#relevantArticle {text-align: left;background:#fff;padding:30px;border-radius: 8px;margin-top:30px;overflow: hidden}
+#relevantArticle .title {font-weight: bold;font-size:18px;color:#222}
+#relevantArticle li {float:left;width:50%;line-height: 26px}

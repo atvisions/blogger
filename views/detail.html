@@ -1,0 +1,87 @@
+{{ define "views/detail.html"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.detail.Title}}</title>
+    <meta name="keywords" content="{{.detail.Keywords}}" />
+    <meta name="description" content="{{.detail.Summary}}" />
+    <link rel="stylesheet" href="/static/css/global.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/index.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/article.css" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        window.onload = function(){
+            var text = new Array();
+            var content = document.getElementsByClassName("content");
+            for(i=0;i<content.length;i++){
+                text[i] = content[i].innerHTML;
+            }
+            var HtmlUtil = {
+                htmlDecodeByRegExp:function(str){
+                    var s = "";
+                    if(str.length == 0) return "";
+                    s = str.replace(/&amp;/g,"&");
+                    s = s.replace(/&lt;/g,"<");
+                    s = s.replace(/&gt;/g,">");
+                    s = s.replace(/&nbsp;/g," ");
+                    s = s.replace(/&#39;/g,"\'");
+                    s = s.replace(/&quot;/g,"\"");
+                    return s;
+                }
+            };
+            for(let i=0;i<content.length;i++){
+                var decodeHTML = HtmlUtil.htmlDecodeByRegExp(text[i]);
+                content[i].innerHTML = decodeHTML
+            }
+        }
+
+    </script>
+</head>
+<body>
+<div id="header">
+    <div class="headBox">
+        <div class="logo"><h1>CaiCai博客园</h1></div>
+        <div class="menu">
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/post">发布文章</a></li>
+                <li>留言</li>
+            </ul>
+
+        </div>
+        <div class="user">登陆 / 注册</div>
+    </div>
+</div>
+<div id="wraper">
+    <div class="route">
+        <ul><li><a href="/">首页</a> &raquo; </li><li> 文章</li></ul>
+    </div>
+    <div id="ArticlePost">
+    <div class="title"><h2>{{.detail.Title}}</h2></div>
+        <div class="articleTag">
+            <ul>
+                <li><i class="fa fa-user-circle"></i>作者：{{ .detail.UserName}}</li>
+                <li><i class="fa fa-clock-o"></i>发布日期：{{ .detail.CreateTime}}</li>
+                <li><i class="fa fa-tags"></i>分类：{{ .detail.CategoryName}}</li>
+                <li><i class="fa fa-eye"></i>浏览：({{ .detail.ViewCount}})</li>
+                <li><i class="fa fa-comments"></i>评论：({{ .detail.CommentCount}})</li>
+            </ul>
+
+        </div>
+        <div class="content">{{ .detail.Content }}</div>
+
+    </div>
+    <div id="relevantArticle">
+        <div class="title">相关文章</div>
+        <ul>
+            {{range.relevantArticle}}
+            <li><a href="/article/detail?id={{.Id}}" title="{{.Title}}"> {{ .Title}}</a></li>
+            {{end}}
+        </ul>
+    </div>
+</div>
+{{template "footer"}}
+</body>
+</html>
+{{end}}
